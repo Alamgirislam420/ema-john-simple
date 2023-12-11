@@ -6,16 +6,23 @@ import Product from '../Product/Product';
 import { key, removeItem } from 'localforage';
 import './Orders.css';
 import { faRemove } from '@fortawesome/free-solid-svg-icons';
+import { deleteShoppingCart, removeFromDb } from '../../../utilities/fakedb';
 
 const Orders = () => {
     const saveCart = useLoaderData();
     const [cart, setCart] = useState(saveCart);
-    
+
     const handleRemoveFromCart = (id) => {
         const remainig = cart.filter(product => product.id !== id);
         setCart(remainig);
-        // removeFormDb(id);
+        removeFromDb(id);
 
+
+    }
+
+    const handleClearCart = () => {
+        setCart([]);
+        deleteShoppingCart();
     }
 
     return (
@@ -30,7 +37,10 @@ const Orders = () => {
                 }
             </div>
             <div className='cart-container'>
-                <Cart cart={cart}></Cart>
+                <Cart
+                    cart={cart}
+                    handleClearCart={handleClearCart}
+                ></Cart>
             </div>
         </div>
     );
