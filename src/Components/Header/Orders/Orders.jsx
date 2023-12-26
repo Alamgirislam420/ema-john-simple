@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Cart from '../Cart/Cart';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import ReviewItem from '../../ReviewItem/ReviewItem';
 import Product from '../Product/Product';
 import { key, removeItem } from 'localforage';
 import './Orders.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { faRemove } from '@fortawesome/free-solid-svg-icons';
 import { deleteShoppingCart, removeFromDb } from '../../../utilities/fakedb';
 
@@ -40,7 +42,13 @@ const Orders = () => {
                 <Cart
                     cart={cart}
                     handleClearCart={handleClearCart}
-                ></Cart>
+                >
+                    <Link className='proceed-link' to="/Checkout">
+                        <button className='btn-proceed'>Proceed checkout
+                            <FontAwesomeIcon icon={faAddressCard}></FontAwesomeIcon>
+                        </button>
+                    </Link>
+                </Cart>
             </div>
         </div>
     );
